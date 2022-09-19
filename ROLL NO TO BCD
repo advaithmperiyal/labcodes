@@ -1,0 +1,12 @@
+roll=input('enter roll number: ')
+bcd=[]
+N=4
+for i in roll:
+    binary=bin(int(i))[2:]
+    if len(binary)!=N:
+        bit='0'*(N-len(binary))
+        code=bit+binary
+        bcd.append(code)
+bcd=''.join(bcd)        
+bcd=[int(i) for i in bcd]
+bcd=np.array(bcd)
