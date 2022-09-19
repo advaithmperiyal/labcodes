@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+fm = 1
+fc = 100
+t = np.linspace (0,1, fc)
+X0 = np.sin(2*np.pi*fm*t)
+X1 = np.sin(2*(np.pi+np.pi/4)*fm*t)
+x2= np.sin(2*(np.pi+np.pi/2)*fm*t)
+x3 = np.sin(2*(np.pi+3*np.pi/4)*fm*t)
+inp = '0101101011110011'
+
+n = []
+
+for i in range(int(len(inp)/2)):
+   if inp[2*1:2* (1+1)] == 100 :
+        n = np.concatenate((n, X0))
+   elif inp[2*i:2*(i+1)] =="01":
+        n = np.concatenate((n, X1))
+   elif inp[2*i:2*(i+1)] =="10":
+        n = np.concatenate((n, x2))
+   elif inp[2*i:2*(i+1)]=="11":
+        n = np.concatenate((n,x3))
+
+plt.plot(n)
+plt.show()
