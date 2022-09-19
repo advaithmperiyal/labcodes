@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+x = [2,0,2,2]
+bcd_x = []
+for i in range(len(x)):
+    y = np.binary_repr(x[i],4)
+    bcd_x.append
+
+xs= ""
+xs_three = []
+sum = 0
+for i in range(len(bcd_x)):
+    sum = int(bcd_x[i],2)+ int(np.binary_repr(3,4),2)
+    xs+=np.binary_repr(sum,4)
+    sum = 0
+xs_three.append(list(xs))
+xs_t = np.concatenate(xs_three)
+print((xs_t))
+
+f = 1
+t = np.linspace(0,1,100)
+modulated_signal = np.array([])
+sine_zero_zero = np.sin(2*np.pi*f*t+np.pi/4)
+sine_zero_one = np.sin(2*np.pi*f*t+3*np.pi/4)
+sine_one_zero = np.sin(2*np.pi*f*t+5*np.pi/4)
+sine_one_one = np.sin(2*np.pi*f*t+7*np.pi/4)
+
+for j in range(0,len(xs_t)-1,2):
+    bits = xs_t[j:j+2]
+    if np.all(bits == ['0','0']):
+        modulated_signal = np.append(modulated_signal,sine_zero_zero)
+    elif np.all(bits == ['0','1']):
+        modulated_signal = np.append(modulated_signal,sine_zero_one)
+    elif np.all(bits == ['1','0']):
+        modulated_signal = np.append(modulated_signal,sine_one_zero)
+    else:
+        modulated_signal = np.append(modulated_signal,sine_one_one)
+
+plt.plot(modulated_signal)
+plt.show()
