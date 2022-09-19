@@ -16,3 +16,28 @@ binary_string = bin(binary_int)
 
 # Getting the converted binary characters
 print(binary_string)
+
+
+#2ND METHOD
+
+msg='MEC'
+a=[]
+for i in msg:
+    asc=ord(i)
+    binary=bin(asc)[2:]
+    a.append(binary)
+a=''.join(a)    
+msg_c=[int(x) for x in a]
+msg_c=np.array(msg_c)
+print(msg_c)
+f=1/6
+t=np.arange(0,1/f,0.01)
+wave=np.sin(2*np.pi*f*t)
+wave2=np.sin(2*np.pi*f*t+np.pi)
+op=np.array([])
+for i in msg_c:
+    if i==0:
+        op=np.append(op,wave)
+    else:
+        op=np.append(op,wave2)
+plt.plot(op)
