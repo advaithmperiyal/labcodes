@@ -1,0 +1,37 @@
+import numpy as np 
+import random
+import matplotlib.pyplot as plt
+num_symbols = 10
+sps = 8
+x = random.choices([0,1], k = 10) 
+for i in range(len(x)):
+    if x[i] == 0:
+        x[i] = -1
+plt.plot(x) 
+plt.show()
+signal = np.array([])
+for value in x:
+    pulse = np.zeros(sps) 
+    pulse[0] = value
+    signal = np.concatenate((signal, pulse))
+    plt.plot(signal) 
+plt.title("Signal") 
+plt.show()
+num_taps = 101
+beta = 0.35 
+Ts = sps
+t = np.arange(-50, 51)
+h = 1/Ts * np.sinc(t/Ts) * np.cos(np.pi * beta * t/Ts) / (1 - (2 * beta * t/Ts)**2)
+plt.plot(t, h, ".")
+plt.show()
+shaped_signal = np.convolve(signal, h) 
+plt.plot(shaped_signal, '.-')
+plt.show()
+final_signal = np.convolve(h, shaped_signal) 
+plt.plot(final_signal)
+plt.show()
+x_shaped = np.convolve(signal, h) 
+for i in range(num_symbols):
+    plt.plot([i*sps+num_taps//2+1, i*sps+num_taps//2+1], [0, x_shaped [i*sps+num_taps//2+1]])
+plt.grid(True) 
+plt.show()
