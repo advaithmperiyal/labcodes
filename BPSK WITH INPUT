@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.special import erfc
+%matplotlib inline
+
+message_frequency = 1
+carrier_frequency = 100
+t = np.linspace(0, 1, carrier_frequency)
+a='101011011011010'
+x1=np.sin(2*np.pi*message_frequency*t)
+x2=-1*x1
+b=[]
+for i in range(int(len(a))):
+    if a[i]=='1':
+        b=np.concatenate((b,x1))
+    if a[i]=='0':
+        b=np.concatenate((b,x2))
+print(b)
+plt.plot(b)
+
+plt.show()
